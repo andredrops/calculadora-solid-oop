@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2025/11/03 17:44:26.000.381,=C:\Users\andre.nobre\Documents\Embarcadero\Studio\Projects\Unit4.pas</Transaction>
+    <Transaction>2025/11/25 08:01:49.568,=C:\Users\andre.nobre\Documents\Embarcadero\Studio\Projects\Unit4.pas</Transaction>
+    <Transaction>2025/11/25 08:02:00.960,=C:\Users\andre.nobre\Documents\Embarcadero\Studio\Projects\Unit5.pas</Transaction>
+    <Transaction>2025/11/25 08:16:00.382,D:\Projetos\andre\Padroes de Projetos Exemplos\Solid\uView.pas=C:\Users\andre.nobre\Documents\Embarcadero\Studio\Projects\Unit5.pas</Transaction>
+    <Transaction>2025/11/25 08:16:12.837,D:\Projetos\andre\Padroes de Projetos Exemplos\Solid\uTCalculadora.pas=C:\Users\andre.nobre\Documents\Embarcadero\Studio\Projects\Unit4.pas</Transaction>
+    <Transaction>2025/11/25 08:16:12.837,D:\Projetos\andre\Padroes de Projetos Exemplos\Solid\uTCalculadora.dfm=C:\Users\andre.nobre\Documents\Embarcadero\Studio\Projects\Unit4.dfm</Transaction>
+    <Transaction>2025/11/25 08:16:22.964,D:\Projetos\andre\Padroes de Projetos Exemplos\Solid\CalculadoraSOLID.dproj=C:\Users\andre.nobre\Documents\Embarcadero\Studio\Projects\Project5.dproj</Transaction>
+    <Transaction>2025/11/25 08:17:43.616,D:\Projetos\andre\Padroes de Projetos Exemplos\Solid\uCalculadora.pas=D:\Projetos\andre\Padroes de Projetos Exemplos\Solid\uView.pas</Transaction>
+    <Transaction>2025/11/25 08:17:53.321,D:\Projetos\andre\Padroes de Projetos Exemplos\Solid\uView.pas=D:\Projetos\andre\Padroes de Projetos Exemplos\Solid\uTCalculadora.pas</Transaction>
+    <Transaction>2025/11/25 08:17:53.321,D:\Projetos\andre\Padroes de Projetos Exemplos\Solid\uView.dfm=D:\Projetos\andre\Padroes de Projetos Exemplos\Solid\uTCalculadora.dfm</Transaction>
+    <Transaction>2025/11/25 08:24:54.793,=D:\Projetos\andre\Padroes de Projetos Exemplos\Solid\Unit1.pas</Transaction>
+    <Transaction>2025/11/25 08:27:11.376,D:\Projetos\andre\Padroes de Projetos Exemplos\Solid\uSomar.pas=D:\Projetos\andre\Padroes de Projetos Exemplos\Solid\Unit1.pas</Transaction>
+    <Transaction>2025/11/25 08:48:13.799,=D:\Projetos\andre\Padroes de Projetos Exemplos\Solid\Unit1.pas</Transaction>
+    <Transaction>2025/11/25 08:48:19.988,D:\Projetos\andre\Padroes de Projetos Exemplos\Solid\uDividir.pas=D:\Projetos\andre\Padroes de Projetos Exemplos\Solid\Unit1.pas</Transaction>
+    <Transaction>2025/11/25 08:49:07.213,=D:\Projetos\andre\Padroes de Projetos Exemplos\Solid\Unit1.pas</Transaction>
+    <Transaction>2025/11/25 08:49:20.465,D:\Projetos\andre\Padroes de Projetos Exemplos\Solid\uValidarDividir.pas=D:\Projetos\andre\Padroes de Projetos Exemplos\Solid\Unit1.pas</Transaction>
+    <Transaction>2025/11/25 09:28:53.219,=D:\Projetos\andre\Padroes de Projetos Exemplos\Solid\Unit1.pas</Transaction>
+    <Transaction>2025/11/25 09:29:14.974,D:\Projetos\andre\Padroes de Projetos Exemplos\Solid\uCalculadoraFactory.pas=D:\Projetos\andre\Padroes de Projetos Exemplos\Solid\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>
