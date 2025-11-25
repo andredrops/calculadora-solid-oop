@@ -1,213 +1,164 @@
-🧩 Sobre o Projeto
+📘 Calculadora SOLID em Delphi
 
-Este projeto foi criado para demonstrar, na prática, como aplicar os princípios SOLID em Delphi usando uma calculadora simples.
+Este projeto demonstra como aplicar SOLID na prática utilizando uma calculadora simples em Delphi.
 
-A ideia é manter o código:
+Foram implementadas:
 
-Extensível (fácil de adicionar novas operações)
+✔ TSomar → operação sem validação
+✔ TDividir → operação com validação (divisor ≠ 0)
 
-Organizado (cada classe fazendo apenas o que deve fazer)
-
-Didático (ideal para estudo e treino)
-
-Foram criadas apenas duas operações:
-
-TSomar → exemplo de operação sem validação
-
-TDividir → exemplo de operação com validação (divisor ≠ 0)
-
-👉 Como exercício, você pode implementar:
-
-TSubtrair
-
-TMultiplicar
+🔧 Exercício sugerido: implementar as classes
+> TSubtrair
+> TMultiplicar
 
 🧠 Arquitetura Geral
-
-A estrutura final ficou assim:
-
 View (Form)
-   ↓ cria
+   ↓ seleciona operação
 TCalculadoraFactory
-   ↓ retorna
-IOperacao (TSomar, TDividir, ...)
-   ↓ informa seu
-IValidador (ou nil)
-   ↓ executado por
+   ↓ retorna IOperacao
+IOperacao
+   ↓ fornece seu validador (IValidador)
 TCalculadora
+   ↓ valida e executa
+Resultado (ou Exception)
+
+Cada peça tem uma responsabilidade clara e única.
 
 
-Cada peça tem uma responsabilidade única e clara.
+🧩 Aplicação do SOLID na prática
+A seguir, cada letra do SOLID com explicação simples e a ligação exata com o código do projeto.
 
-🧱 Aplicação Prática do SOLID (simples e direto)
+✔ S — Single Responsibility Principle (Responsabilidade Única)
+> Cada classe faz APENAS uma coisa:
 
-Aqui está a relação entre cada letra do SOLID e o projeto, com explicações curtas e os pontos exatos onde isso aparece no código.
+TSomar → regra de soma
+TDividir → regra de divisão
+TValidadorDivisao → valida divisor zero
+TCalculadora → orquestra operação + validação
+TCalculadoraFactory → monta o ComboBox com operações
 
-✔ S – Single Responsibility Principle (Responsabilidade Única)
+📍 Onde isso aparece no projeto:
+Cada unit (uSomar, uDividir, uCalculadora, uCalculadoraFactory) tem apenas um motivo para existir.
 
-Cada classe faz uma única coisa:
+✔ O — Open/Closed Principle (Aberto para extensão, Fechado para modificação)
+>Você pode adicionar uma nova operação sem alterar nada no que já existe.
 
-TSomar → soma dois números
+Exemplo: TRaizQuadrada
 
-TDividir → divide dois números
+Basta criar:
 
-TValidadorDivisao → apenas valida divisor zero
+TRaizQuadrada = class ...
+Se necessário: TValidadorRaizQuadrada
+Nenhuma classe precisa ser modificada:
 
-TCalculadora → apenas orquestra (validar + calcular)
+❌ não edita TCalculadora
+❌ não edita TSomar
+❌ não edita TDividir
+❌ não edita validadores existentes
 
-TCalculadoraFactory → apenas cria/prepara operações para a view
+📍 Onde isso aparece no projeto:
+IOperacao.GetValidar permite que a operação indique seu próprio validador.
 
-👉 Onde ver isso no projeto:
-Cada unidade (uSomar, uDividir, uCalculadora, uCalculadoraFactory) contém apenas uma responsabilidade central.
-
-✔ O – Open/Closed Principle (Aberto para extensão, Fechado para modificação)
-
-Você pode adicionar novas operações sem alterar classes existentes.
-
-Exemplo: adicionar TRaizQuadrada no futuro.
-Para isso, basta criar:
-
-Nova classe: TRaizQuadrada
-
-Novo validador (se necessário)
-
-E nada muda em:
-
-TCalculadora
-
-TSomar
-
-TDividir
-
-TCalculadoraFactory (se usar registro automático)
-
-👉 Onde ver isso no projeto:
-O método TRaizQuadrada.GetValidador informaria seu próprio validador.
-A Calculadora não sabe quais operações existem — apenas executa a interface IOperacao.
-
-✔ L – Liskov Substitution Principle (Substituição de Liskov)
-
-Qualquer operação deve funcionar no lugar de outra.
-
-Exemplo:
+✔ L — Liskov Substitution Principle (Substituição de Liskov)
+>Qualquer operação deve funcionar no lugar da outra:
 
 FOperacao := TSomar.Create;
 FOperacao := TDividir.Create;
 
+Ambas funcionam porque seguem IOperacao.
 
-Ambas funcionam porque implementam IOperacao.
+📍 Onde isso aparece no projeto:
+TCalculadora.Calcular nunca sabe qual classe concreta está recebendo — só usa a interface.
 
-👉 Onde ver isso no projeto:
-A Calculadora chama sempre:
-
-AOperacao.Executar(AN1, AN2);
-
-
-e isso funciona para qualquer operação.
-
-✔ I – Interface Segregation Principle (Segregação de Interface)
-
-Interfaces são pequenas e específicas:
+✔ I — Interface Segregation Principle (Segregação de Interfaces)
+>Interfaces pequenas e específicas:
 
 IOperacao → calcula
 IValidador → valida
 
+Nenhuma operação é obrigada a validar se não precisar.
 
-Não existe uma interface gigante obrigando todas as operações a terem métodos de validação, impressão, logs, etc.
+📍 Onde isso aparece:
 
-👉 Onde ver isso no projeto:
-TSomar.GetValidar → retorna nil (não precisa validar)
-TDividir.GetValidar → retorna TValidadorDivisao
+TSomar.GetValidar → retorna nil
+TDividir.GetValidar → retorna seu validador específico
 
-Cada classe usa apenas o que precisa.
+✔ D — Dependency Inversion Principle (Inversão de Dependência)
+>O sistema depende de interfaces, não de implementações concretas.
 
-✔ D – Dependency Inversion Principle (Inversão de Dependência)
+📍 Onde isso aparece:
+TCalculadora.Calcular recebe apenas:
+IOperacao, Double, Double
 
-A Calculadora depende de abstrações (interfaces), não de classes concretas.
+E a validação também é interface (IValidador).
 
-Ela não sabe:
+🧪 Funcionalidades implementadas
+✔ Soma
 
-se é soma, divisão, multiplicação, raiz…
+Sem regras extras.
 
-se existe validador ou não
+✔ Divisão
 
-Ela só usa:
+Validação:  divisor não pode ser 0 = gera exception
+view captura e exibe a mensagem ao usuário
 
-IOperacao
-IValidador
+🎓 Exercício para estudo
 
-
-👉 Onde ver isso no projeto:
-O método:
-
-function TCalculadora.Calcular(...)
-
-
-Trabalha apenas com interfaces.
-
-🧪 Funcionalidades Implementadas
-✔ SOMAR
-
-Simples, sem nenhuma validação.
-
-✔ DIVIDIR
-
-Inclui validação específica:
-
-divisor ≠ 0
-
-se inválido → lança exception tratada na view
-
-🎓 Exercício Proposto (para estudo)
-
-Implemente as classes:
+Implemente:
 
 TSubtrair
-
 TMultiplicar
 
-Cada uma com:
+Passos:
 
-implementação de IOperacao
+- Criar classe implementando IOperacao
+- Retornar nil em GetValidar
+- Adicionar na TCalculadoraFactory.PopularCombo
 
-GetValidar retornando nil
+⚠️ Boas práticas com Exceptions (como aplicado aqui)
+✔ 1. A operação ou o validador deve gerar a exception
 
-registro na TCalculadoraFactory.PopularCombo
+Exemplo simplificado:
 
-Após isso, o ComboBox passa a permitir escolher as novas operações automaticamente.
+if ANumero2 = 0 then
+  raise Exception.Create('Não é possível dividir por zero.');
 
-🚀 Como rodar
+✔ 2. A Calculadora nunca exibe mensagem
 
-Abra o projeto no Delphi
+Ela só:
+- pergunta pelo validador
+- valida
+- executa
+- retorna o resultado
 
-Execute o formulário principal
+✔ 3. A View (Form) é responsável pelo feedback visual
 
-Escolha a operação no ComboBox
+Exemplo:
 
-Informe dois números
+try
+  lblResultado.Caption := FCalculadora.Calcular(FOperacao, N1, N2);
+except
+  on E: Exception do
+    ShowMessage('Erro: ' + E.Message);
+end;
 
-Clique em “Calcular”
+🎯 Resultado:
 
-A view cuida apenas de:
+-Domínio não tem dependência de UI
+-UI não sabe como funciona a lógica
+-Cada camada tem um papel claro (SRP + DIP)
 
-escolher operação
+📦 Tecnologias utilizadas
 
-exibir resultado
+-Delphi OOP
+-Interfaces
+-Factory Method simples
+-Aplicação de SOLID
 
-tratar exceções com ShowMessage
+🚀 Como executar
 
-Toda a lógica SOLID fica nos objetos.
-
-📦 Tecnologias e padrões usados
-
-Delphi VCL
-
-Interfaces
-
-Factory Method (simples)
-
-Encapsulamento
-
-Abstração
-
-SOLID aplicado na prática
+-Abra o projeto no Delphi
+-Execute a aplicação
+-Escolha a operação no ComboBox
+-Digite dois números
+-Clique em Calcular
